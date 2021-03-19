@@ -4,7 +4,7 @@ class FollowsController < ApplicationController
 
   # GET /follows or /follows.json
   def index
-    @follows = Follow.all
+    @follows = Follow.where(:user_id => @logged_in_user.id)
   end
 
   # GET /follows/1 or /follows/1.json

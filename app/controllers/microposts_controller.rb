@@ -4,7 +4,7 @@ class MicropostsController < ApplicationController
 
   # GET /microposts or /microposts.json
   def index
-    @microposts = Micropost.where(:user => @logged_in_user).limit(25)
+    @microposts = Micropost.where(:user => @logged_in_user)
   end
 
   # GET /microposts/1 or /microposts/1.json
