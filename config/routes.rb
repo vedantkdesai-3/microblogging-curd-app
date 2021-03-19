@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :users 
   resources :microposts 
   resources :follows
+  resources :unfollowed 
   resources :sessions, only: [:new, :create, :destroy]
 
   
