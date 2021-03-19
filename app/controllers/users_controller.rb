@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :logged_in_user, :auth_check, :except=>[:new,:create]
-  before_action :reset_session, :except=>[:create]
+  before_action :reset_session, :except=>[:create, :show, :index]
 
   # GET /users or /users.json
   def index

@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
   
-  
-  resources :follows
   root 'home#index'
   
   resources :users 
   resources :microposts 
+  resources :follows
   resources :sessions, only: [:new, :create, :destroy]
 
   
