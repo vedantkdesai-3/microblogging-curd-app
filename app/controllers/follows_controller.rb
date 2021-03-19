@@ -1,5 +1,5 @@
 class FollowsController < ApplicationController
-  before_action :set_follow, only: %i[ show edit update destroy view_user ]
+  before_action :set_follow, only: %i[ show edit update destroy ]
   before_action :logged_in_user, :auth_check
 
   # GET /follows or /follows.json
@@ -18,10 +18,6 @@ class FollowsController < ApplicationController
 
   # GET /follows/1/edit
   def edit
-  end
-
-  def view_follower 
-    redirect_to controller: "users", action: "show"
   end
 
   # POST /follows or /follows.json
