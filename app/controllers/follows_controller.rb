@@ -14,6 +14,7 @@ class FollowsController < ApplicationController
   # GET /follows/new
   def new
     @follow = Follow.new
+    set_following()
   end
 
   # GET /follows/1/edit
@@ -26,7 +27,7 @@ class FollowsController < ApplicationController
     @follow.user_id = @logged_in_user.id
     respond_to do |format|
       if @follow.save
-        format.html { redirect_to @follow, notice: "Follow was successfully created." }
+        format.html { redirect_to @follow, notice: "Followed successfully." }
         format.json { render :show, status: :created, location: @follow }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -52,7 +53,7 @@ class FollowsController < ApplicationController
   def destroy
     @follow.destroy
     respond_to do |format|
-      format.html { redirect_to follows_url, notice: "Followed user successfully." }
+      format.html { redirect_to follows_url, notice: "User unfollowed successfully." }
       format.json { head :no_content }
     end
   end
@@ -66,5 +67,9 @@ class FollowsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def follow_params
       params.require(:follow).permit(:user_id, :following_user_id)
+    end
+
+    def set_following
+      @follow.following_user_id = params[:format]
     end
 end
