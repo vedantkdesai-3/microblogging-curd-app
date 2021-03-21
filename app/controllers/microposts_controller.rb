@@ -4,7 +4,10 @@ class MicropostsController < ApplicationController
 
   # GET /microposts or /microposts.json
   def index
-    @microposts = Micropost.where(:user => @logged_in_user)
+
+    @microposts = Micropost
+                           .where(:user_id => Follow.where(:user_id => @logged_in_user.id).pluck(:following_user_id))
+                           .or(Micropost.where(:user=> @logged_in_user))
   end
 
   # GET /microposts/1 or /microposts/1.json
