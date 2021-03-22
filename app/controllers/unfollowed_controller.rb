@@ -4,7 +4,9 @@ class UnfollowedController < ApplicationController
     def index 
         @unfollowed_users = User.where.not(:id => @logged_in_user.id)
                                 .where.not(:id => Follow.select(:following_user_id).where(:user_id => @logged_in_user.id))
-            
+        #@unfollowed_users.followed = User.where.not(:id => @logged_in_user.id)
+        #                        .where.not(:id => Follow.select(:following_user_id).where(:user_id => @logged_in_user.id))
+          
     end
 
 end
