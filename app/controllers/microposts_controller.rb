@@ -1,13 +1,15 @@
 class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[ show edit update destroy ] 
-  before_action :logged_in_user, :auth_check            
+  before_action :logged_in_user, :auth_check  
+  before_action :check_owner, only: %i[ update destroy ]         
 
   # GET /microposts or /microposts.json
   def index
-
-    @microposts = Micropost
+    @microposts = Micropost.joins(:user)
+                           .includes(:user)
                            .where(:user_id => Follow.where(:user_id => @logged_in_user.id).pluck(:following_user_id))
                            .or(Micropost.where(:user=> @logged_in_user))
+                           
   end
 
   # GET /microposts/1 or /microposts/1.json
@@ -74,5 +76,11 @@ class MicropostsController < ApplicationController
 
     def update_user_id
       @micropost.user_id = @logged_in_user.id
+    end
+
+    def check_owner 
+      if @micropost.user_id != @logged_in_user.id
+        redirect_to microposts_url, alert: "You are not authorized user!!!"
+      end
     end
 end
