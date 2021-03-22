@@ -15,7 +15,7 @@
       <tr>
         <td><%= user.email %></td>
         <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Follow', new_follow_path(user) %></td>
+        <td><%= link_to 'Follow', follows_path(user), method: :POST %></td>
       </tr>
     <% end %>
   </tbody>

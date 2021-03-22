@@ -1,5 +1,5 @@
 class FollowsController < ApplicationController
-  before_action :set_follow, only: %i[ show create edit update destroy ]
+  before_action :set_follow, only: %i[ show edit update destroy ]
   before_action :logged_in_user, :auth_check
 
   # GET /follows or /follows.json
@@ -23,16 +23,14 @@ class FollowsController < ApplicationController
 
   # POST /follows or /follows.json
   def create
-    @follow = Follow.new(follow_params)
+    @follow = Follow.new
+    set_following();
     @follow.user_id = @logged_in_user.id
-    respond_to do |format|
-      if @follow.save
-        format.html { redirect_to @follow, notice: "Followed successfully." }
-        format.json { render :show, status: :created, location: @follow }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @follow.errors, status: :unprocessable_entity }
-      end
+    if @follow.save
+      redirect_to unfollowed_index_path, notice: "Followed successfully."
+    else
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @follow.errors, status: :unprocessable_entity }
     end
   end
 
