@@ -1,0 +1,16 @@
+# .rubocop.yml
+
+Style/Documentation:
+    Enabled: false
+
+MethodLength:
+    Max: 35
+
+AllCops:
+    Exclude:
+        - 'db/**/*'
+        - 'bin/**/*'
+        - 'tmp/**/*'
+        - 'test/**/*'
+        - 'config/**/*'
+        - 'node_modules/**/*'
