@@ -6,7 +6,7 @@ class FollowsController < ApplicationController
 
   # GET /follows or /follows.json
   def index
-    @follows = Follow.where(following_user_id: @logged_in_user.id)
+    @follows = Follow.where(following_user_id: logged_in_user.id)
   end
 
   # GET /follows/1 or /follows/1.json
@@ -25,7 +25,7 @@ class FollowsController < ApplicationController
   def create
     @follow = Follow.new
     set_following
-    @follow.user_id = @logged_in_user.id
+    @follow.user_id = logged_in_user.id
     if @follow.save
       redirect_to unfollowed_index_path, notice: 'Followed successfully.'
     else

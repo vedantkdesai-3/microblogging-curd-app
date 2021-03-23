@@ -73,6 +73,6 @@ class UsersController < ApplicationController
   end
 
   def check_owner
-    redirect_to users_url, alert: 'You are not authorized user!!!' if @user.id != @logged_in_user.id
+    redirect_to users_url, alert: 'You are not authorized user!!!' if @user.id != logged_in_user.id
   end
 end

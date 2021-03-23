@@ -9,8 +9,8 @@ class MicropostsController < ApplicationController
   def index
     @microposts = Micropost.joins(:user)
                            .includes(:user)
-                           .where(user_id: Follow.where(user_id: @logged_in_user.id).pluck(:following_user_id))
-                           .or(Micropost.where(user: @logged_in_user))
+                           .where(user_id: Follow.where(user_id: logged_in_user.id).pluck(:following_user_id))
+                           .or(Micropost.where(user: logged_in_user))
   end
 
   # GET /microposts/1 or /microposts/1.json
@@ -75,10 +75,10 @@ class MicropostsController < ApplicationController
   end
 
   def update_user_id
-    @micropost.user_id = @logged_in_user.id
+    @micropost.user_id = logged_in_user.id
   end
 
   def check_owner
-    redirect_to microposts_url, alert: 'You are not authorized user!!!' if @micropost.user_id != @logged_in_user.id
+    redirect_to microposts_url, alert: 'You are not authorized user!!!' if @micropost.user_id != logged_in_user.id
   end
 end
