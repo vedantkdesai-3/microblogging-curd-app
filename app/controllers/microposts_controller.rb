@@ -11,10 +11,19 @@ class MicropostsController < ApplicationController
                            .includes(:user)
                            .where(user_id: Follow.where(user_id: logged_in_user.id).pluck(:following_user_id))
                            .or(Micropost.where(user: logged_in_user))
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @microposts, each_serializer: MicropostSerializer }
+    end
   end
 
   # GET /microposts/1 or /microposts/1.json
-  def show; end
+  def show
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @micropost, serializer: MicropostSerializer }
+    end
+  end
 
   # GET /microposts/new
   def new

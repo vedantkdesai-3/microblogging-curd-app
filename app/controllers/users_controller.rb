@@ -9,10 +9,19 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     @users = User.all
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @users, each_serializer: UserSerializer }
+    end
   end
 
   # GET /users/1 or /users/1.json
-  def show; end
+  def show
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @user, serializer: UserSerializer }
+    end
+  end
 
   # GET /users/new
   def new
@@ -28,7 +37,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to root_url, notice: 'User was successfully created.' }
+        format.html { redirect_to root_url }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }

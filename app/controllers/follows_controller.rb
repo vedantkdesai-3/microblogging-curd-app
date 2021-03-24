@@ -10,7 +10,8 @@ class FollowsController < ApplicationController
   end
 
   # GET /follows/1 or /follows/1.json
-  def show; end
+  def show
+  end
 
   # GET /follows/new
   def new

@@ -4,15 +4,16 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        
         {
             "name": "Rails server",
             "type": "Ruby",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/rails",
+            "program": "bin/rails",
+            "cwd": "${workspaceRoot}",
+            "showDebuggerOutput": true,
             "args": [
-                "server"
+              "server"
             ]
-        }
+          }
     ]
 }
