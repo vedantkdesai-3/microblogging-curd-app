@@ -7,6 +7,10 @@ class FollowsController < ApplicationController
   # GET /follows or /follows.json
   def index
     @follows = Follow.where(following_user_id: logged_in_user.id)
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @follows, each_serializer: FollowSerializer }
+    end
   end
 
   # GET /follows/1 or /follows/1.json
