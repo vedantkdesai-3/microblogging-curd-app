@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery unless: -> { request.format.json? }
 
   include Security::Authentication
   include Security::Authorization
@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
   after_action :audit_application
 
   def logged_in_user
-    (User.select(:id,:name,:email).find(session[:user_id]) if session[:user_id])
+    (User.select(:id, :name, :email).find(session[:user_id]) if session[:user_id])
   end
-  
 end

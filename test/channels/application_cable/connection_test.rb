@@ -8,4 +8,5 @@ class ApplicationCable::ConnectionTest < ActionCable::Connection::TestCase
   #
   #   assert_equal connection.user_id, "42"
   # end
+  cookies.signed[:user_id] = 1
 end
